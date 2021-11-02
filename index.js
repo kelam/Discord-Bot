@@ -1,15 +1,17 @@
-require("dotenv").config();
-
-const { SlashCommandBuilder } = require("@discordjs/builders");
+// Require necessary discord.js classes
 const { Client, Intents } = require("discord.js");
-const music = require("@koenie06/discord.js-music");
+const { token } = require("./config.json");
+
+// Create a new client instance
 const client = new Client({ intents: 
     [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]
 });
 
-client.on("ready", () => {
+// Runs once the bot is ready
+client.once("ready", () => {
     console.log("The bot is online!");
 });
 
-client.login(process.env.TOKEN);
+// Login to Discord with my bot's token
+client.login(token);
 
