@@ -2,7 +2,7 @@
 const fs = require("fs");
 
 // Require necessary discord.js classes
-const { Client, Collections, Intents, ClientUser } = require("discord.js");
+const { Client, Collection, Intents } = require("discord.js");
 const { token } = require("./config.json");
 
 // Create a new client instance
