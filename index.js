@@ -10,6 +10,21 @@ const client = new Client({ intents:
     [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]
 });
 
+// fs.readdirSync().filter() returns an array of all file names in given directory
+const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    if (event.once) {
+        // Callback function collects arguments returned using ... rest parameter syntax.
+        // Calls event.execute() while passing in the args using the ... syntax
+            // Different events in discord.js have diff nums of arguments
+        client.once(event.name, (...args) => event.execute(...args));
+    } else{
+        client.on(event.name, (...args) => event.execute(...args));
+    }
+}
+
 // Can access commands in other files
 client.commands = new Collection();
 //fs.readdirSync() returns array of all file names in a directory
