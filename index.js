@@ -27,6 +27,7 @@ for (const file of eventFiles) {
 
 // Can access commands in other files
 client.commands = new Collection();
+
 //fs.readdirSync() returns array of all file names in a directory
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 
@@ -37,11 +38,6 @@ for (const file of commandFiles) {
     // With the key as the command name and the value as the exported module
     client.commands.set(command.data.name, command);
 }
-
-// Runs once the bot is ready
-client.once("ready", () => {
-    console.log("The bot is online!");
-});
 
 /* Dynamically executing commands */
 
